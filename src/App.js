@@ -17,7 +17,7 @@ function App() {
               longitude
             }
             // const data = await axios.post('http://192.168.0.198:1000/post',d)
-            const data = await axios.post('http://192.168.0.198:1000/post',d)
+            const data = await axios.post('https://192.168.0.198:1000/post',d)
             console.log(data)
             
             // console.log(latitude, longitude);
