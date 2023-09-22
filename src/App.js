@@ -1,24 +1,44 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+
+  useEffect(() => {
+    
+   async function loc() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          async (position) => {
+            const { latitude, longitude } = position.coords;
+            const d = {
+              latitude,
+              longitude
+            }
+            // const data = await axios.post('http://192.168.0.198:1000/post',d)
+            const data = await axios.post('https://ecb8-2401-4900-62a5-49d4-d94b-7664-c997-ad21.ngrok-free.app:1000/post',d)
+            console.log(data)
+            
+            console.log(latitude, longitude);
+          },
+          (error) => {
+            // Handle geolocation error
+            console.error('Error getting current location:', error);
+          }
+          );
+        } else {
+          // Geolocation is not supported in the browser
+          console.error('Geolocation is not supported.');
+        }
+      }
+      loc();
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    </>
+
   );
 }
 
